@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1er Cumpleaños - Nahomi Abigail</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+    <!-- Confetti Script -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bee-yellow': '#FFD700',
+                        'bee-black': '#2d2d2d',
+                        'bee-pale': '#FFFBE6',
+                        'honey': '#F59E0B',
+                    },
+                    fontFamily: {
+                        'fun': ['Fredoka', 'sans-serif'],
+                        'script': ['Pacifico', 'cursive'],
+                    },
+                    animation: {
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'fly-1': 'flyRight 15s linear infinite',
+                        'fly-2': 'flyLeft 18s linear infinite',
+                    },
+                    keyframes: {
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        flyRight: {
+                            '0%': { left: '-10%', top: '20%', transform: 'rotate(10deg)' },
+                            '25%': { top: '10%' },
+                            '50%': { top: '30%' },
+                            '75%': { top: '15%' },
+                            '100%': { left: '110%', top: '25%', transform: 'rotate(10deg)' }
+                        },
+                        flyLeft: {
+                            '0%': { right: '-10%', bottom: '30%', transform: 'scaleX(-1) rotate(10deg)' },
+                            '25%': { bottom: '40%' },
+                            '50%': { bottom: '20%' },
+                            '75%': { bottom: '35%' },
+                            '100%': { right: '110%', bottom: '25%', transform: 'scaleX(-1) rotate(10deg)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #E0F2FE; /* Sky blue */
+            background-image: radial-gradient(#F0F9FF 15%, transparent 16%), radial-gradient(#F0F9FF 15%, transparent 16%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            overflow-x: hidden;
+        }
+
+        .honeycomb-mask {
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+
+        .dashed-border {
+            background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='20' ry='20' stroke='%23F59E0BFF' stroke-width='4' stroke-dasharray='15%2c 15' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+        }
+
+        /* Bee Wings Animation */
+        .wing {
+            animation: flutter 0.2s infinite;
+            transform-origin: center right;
+        }
+        @keyframes flutter {
+            0% { transform: scaleY(1); }
+            50% { transform: scaleY(0.7); }
+            100% { transform: scaleY(1); }
+        }
+    </style>
+</head>
+<body class="font-fun min-h-screen flex items-center justify-center p-4 relative">
+
+    <!-- Flying Bees Background -->
+    <div class="absolute w-12 h-12 animate-fly-1 z-0 opacity-80 pointer-events-none">
+        <svg viewBox="0 0 100 100" class="drop-shadow-lg">
+            <path d="M30,50 Q10,20 30,50 Q10,80 30,50" fill="rgba(255,255,255,0.8)" class="wing" />
+            <ellipse cx="50" cy="50" rx="30" ry="20" fill="#FFD700" />
+            <line x1="40" y1="30" x2="40" y2="70" stroke="#000" stroke-width="5" />
+            <line x1="60" y1="30" x2="60" y2="70" stroke="#000" stroke-width="5" />
+            <circle cx="75" cy="45" r="3" fill="#000" />
+        </svg>
+    </div>
+    
+    <div class="absolute w-10 h-10 animate-fly-2 z-0 opacity-80 pointer-events-none delay-1000">
+        <svg viewBox="0 0 100 100" class="drop-shadow-lg">
+            <path d="M30,50 Q10,20 30,50 Q10,80 30,50" fill="rgba(255,255,255,0.8)" class="wing" />
+            <ellipse cx="50" cy="50" rx="30" ry="20" fill="#FFD700" />
+            <line x1="40" y1="30" x2="40" y2="70" stroke="#000" stroke-width="5" />
+            <line x1="60" y1="30" x2="60" y2="70" stroke="#000" stroke-width="5" />
+            <circle cx="75" cy="45" r="3" fill="#000" />
+        </svg>
+    </div>
+
+    <!-- Main Invitation Card -->
+    <div class="bg-white max-w-md w-full rounded-[30px] shadow-2xl overflow-hidden relative z-10 animate-float border-4 border-white ring-4 ring-bee-yellow/30">
+        
+        <!-- Header -->
+        <div class="bg-bee-yellow p-6 text-center relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full opacity-10" style="background-image: radial-gradient(#000 2px, transparent 2px); background-size: 15px 15px;"></div>
+            
+            <h2 class="text-bee-black text-xl font-bold uppercase tracking-widest mb-1">¡Estás invitado!</h2>
+            <h1 class="font-script text-5xl text-bee-black transform -rotate-2 drop-shadow-md">1er Añito</h1>
+        </div>
+
+        <!-- Content -->
+        <div class="p-8 text-center flex flex-col items-center gap-6 bg-bee-pale">
+            
+            <!-- Photo Frame (Honeycomb) -->
+            <div class="relative w-48 h-48 mx-auto filter drop-shadow-xl hover:scale-105 transition-transform duration-300">
+                <div class="absolute inset-0 bg-honey honeycomb-mask transform scale-105"></div>
+                <!-- IMAGE SOURCE: Using the filename uploaded by the user -->
+                <img src="abi.jpg" 
+                     onerror="this.src='https://images.unsplash.com/photo-1560707303-4e9803d16556?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60'" 
+                     alt="Nahomi Abigail" 
+                     class="w-full h-full object-cover honeycomb-mask relative z-10 bg-gray-200">
+                
+                <!-- Cute decoration on photo -->
+                <div class="absolute -top-4 -right-4 text-4xl animate-bounce z-20">🐝</div>
+                <div class="absolute -bottom-2 -left-2 text-3xl z-20">🌻</div>
+            </div>
+
+            <!-- Name -->
+            <div class="space-y-2">
+                <p class="text-gray-600 text-lg">Celebremos juntos el primer cumpleaños de nuestra dulce abejita</p>
+                <h2 class="font-script text-4xl text-honey font-bold pt-2">Nahomi Abigail</h2>
+            </div>
+
+            <!-- Details Box -->
+            <div class="w-full dashed-border p-5 rounded-2xl bg-white/50 space-y-4">
+                
+                <!-- Date -->
+                <div class="flex items-center gap-4 text-left">
+                    <div class="bg-bee-yellow p-3 rounded-full text-bee-black shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500 uppercase font-bold tracking-wide">¿Cuándo?</p>
+                        <p class="text-xl font-bold text-bee-black">Sábado, 20 Dic</p>
+                    </div>
+                </div>
+
+                <!-- Time -->
+                <div class="flex items-center gap-4 text-left">
+                    <div class="bg-bee-yellow p-3 rounded-full text-bee-black shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500 uppercase font-bold tracking-wide">¿A qué hora?</p>
+                        <p class="text-xl font-bold text-bee-black">5:00 PM</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Map Section -->
+            <div class="w-full mt-2">
+                <a href="https://maps.app.goo.gl/9zUxa2GBuWjCzH8M8" target="_blank" class="group relative block transform transition-all hover:scale-105 active:scale-95">
+                    <div class="absolute inset-0 bg-honey rounded-xl translate-y-1.5 group-hover:translate-y-2 transition-transform"></div>
+                    <div class="relative bg-bee-black text-white p-4 rounded-xl flex items-center justify-center gap-3 border-2 border-honey">
+                        <svg class="animate-pulse text-bee-yellow" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span class="font-bold text-lg">Ver Ubicación en Mapa</span>
+                    </div>
+                </a>
+                <p class="text-xs text-gray-500 mt-2">Toca el botón para abrir Google Maps</p>
+            </div>
+
+        </div>
+        
+        <!-- Footer -->
+        <div class="bg-bee-yellow p-4 text-center">
+            <p class="text-bee-black font-semibold">¡Te esperamos con mucha dulzura! 🍯</p>
+        </div>
+    </div>
+
+    <!-- Music/Audio Control (Optional Idea for later) -->
+    
+    <script>
+        // Confetti effect on load
+        window.addEventListener('load', () => {
+            const duration = 3 * 1000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                const particleCount = 50 * (timeLeft / duration);
+                
+                // Yellow and Black confetti
+                confetti(Object.assign({}, defaults, { 
+                    particleCount, 
+                    origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+                    colors: ['#FFD700', '#000000', '#FFFFFF']
+                }));
+                confetti(Object.assign({}, defaults, { 
+                    particleCount, 
+                    origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+                    colors: ['#FFD700', '#000000', '#FFFFFF']
+                }));
+            }, 250);
+        });
+    </script>
+</body>
+</html>
